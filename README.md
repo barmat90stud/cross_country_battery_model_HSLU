@@ -18,7 +18,22 @@ conda install python=3.9
 python -m pip install -r requirements.txt
 ```
 
+## Run dash (visualized Kafka streams)
+Open `Anaconda Prompt`
+(via Windows start menu)
+```
+# change to the directory of this README.md file
+cd c:\projects\cross_country_battery_model_HSLU
+
+conda activate .venv/
+python visualize_streams.py
+```
+
 ## Run faust (Kafka streams consumer)
+(not necessary for the visualisation for now,
+ but the `faust` library could be used instead of
+ `kafka-python` which is used now)
+
 Open `Anaconda Prompt`
 (via Windows start menu)
 ```
