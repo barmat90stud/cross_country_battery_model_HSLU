@@ -147,8 +147,4 @@ dmypy.json
 .DS_Store
 
 # VORN Data
-Data_1/*
-Data_3/*
-Data_Dictionary.xlsx
-~$Data_Dictionary.xlsx
-data_discription_vorn.pdf
+Data/*
