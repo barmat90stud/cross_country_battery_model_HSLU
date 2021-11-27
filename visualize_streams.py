@@ -4,16 +4,14 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly
 import plotly.graph_objs as go
-from collections import deque
 
 from consume_streams import get_next_stream_message
 
 
-X = deque(maxlen=20)
-X.append(1)
+# VORN data
+MIN_VALUE = 0.0
+MAX_VALUE = 200.0
 
-Y = deque(maxlen=20)
-Y.append(1)
 
 app = dash.Dash(__name__)
 
@@ -23,7 +21,7 @@ app.layout = html.Div(
         dcc.Interval(
             id='graph-update',
             interval=1000,
-            n_intervals=0
+            n_intervals=0,
         ),
     ]
 )
@@ -31,24 +29,19 @@ app.layout = html.Div(
 
 @app.callback(
     Output('live-graph', 'figure'),
-    [Input('graph-update', 'n_intervals')]
+    [Input('graph-update', 'n_intervals')],
 )
-def update_graph_scatter(n):
-    X.append(X[-1] + 1)
-    Y.append(next(get_next_stream_message()))
-
-    data = plotly.graph_objs.Scatter(
-        x=list(X),
-        y=list(Y),
-        name='Scatter',
-        mode='lines+markers'
+def update_graph(n):
+    data = plotly.graph_objs.Bar(
+        x=[next(get_next_stream_message())],
     )
 
-    return {'data': [data],
-            'layout': go.Layout(
-                xaxis=dict(range=[min(X), max(X)]),
-                yaxis=dict(range=[min(Y), max(Y)]),
-            )}
+    return {
+        'data': [data],
+        'layout': go.Layout(
+            xaxis={"range": [MIN_VALUE, MAX_VALUE]},
+        ),
+    }
 
 
 if __name__ == '__main__':
