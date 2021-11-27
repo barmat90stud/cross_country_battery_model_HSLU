@@ -9,9 +9,8 @@ from consume_streams import get_next_stream_message
 
 
 # VORN data
-from mode.utils.text import title
 
-MIN_VALUE = 80.0
+MIN_VALUE = 40.0
 MAX_VALUE = 200.0
 
 ENERGY_NEEDED_THRESHOLD = 140.0
@@ -31,13 +30,20 @@ app.layout = html.Div(
     ]
 )
 
+newest_value = MIN_VALUE
+
 
 @app.callback(
     Output("live-graph", "figure"),
     [Input("graph-update", "n_intervals")],
 )
 def update_graph(n):
-    value = next(get_next_stream_message())
+    global newest_value
+
+    if value := next(get_next_stream_message()):
+        newest_value = value
+    else:
+        value = newest_value
 
     data = plotly.graph_objs.Bar(
         x=[value],
