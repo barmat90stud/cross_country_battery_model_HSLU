@@ -14,6 +14,9 @@ from mode.utils.text import title
 MIN_VALUE = 80.0
 MAX_VALUE = 200.0
 
+ENERGY_NEEDED_THRESHOLD = 140.0
+NEARLY_DYING_THRESHOLD = 185.0
+
 
 app = dash.Dash(__name__)
 
@@ -34,9 +37,18 @@ app.layout = html.Div(
     [Input("graph-update", "n_intervals")],
 )
 def update_graph(n):
+    value = next(get_next_stream_message())
+
     data = plotly.graph_objs.Bar(
-        x=[next(get_next_stream_message())],
+        x=[value],
     )
+
+    if value <= ENERGY_NEEDED_THRESHOLD:
+        status_color = "green"
+    elif ENERGY_NEEDED_THRESHOLD < value < NEARLY_DYING_THRESHOLD:
+        status_color = "yellow"
+    else:
+        status_color = "red"
 
     return {
         "data": [data],
@@ -44,6 +56,7 @@ def update_graph(n):
             xaxis={"range": [MIN_VALUE, MAX_VALUE]},
             yaxis={"visible": False, "showticklabels": False},
             title="Cross-Country Battery",
+            colorway=[status_color],
         ),
     }
 
