@@ -34,13 +34,8 @@ app.layout = html.Div(
     [Input('graph-update', 'n_intervals')]
 )
 def update_graph_scatter(n):
-    X.append(X[-1]+1)
-
-    # TODO hier weitermachen, bockt noch wegen generator (yield)
+    X.append(X[-1] + 1)
     Y.append(next(get_next_stream_message()))
-
-    # for debugging:
-    # get_next_stream_message(); import random; Y.append(Y[-1]+Y[-1] * random.uniform(-0.1, 0.1))
 
     data = plotly.graph_objs.Scatter(
         x=list(X),

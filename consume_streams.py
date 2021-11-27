@@ -15,7 +15,7 @@ consumer = KafkaConsumer(
 # we use this to return this value
 # if kafka has currently not a new value at the moment
 # (last_value stores the last kafka value)
-last_value = 0
+last_value = 0.0
 
 
 def get_next_stream_message():
@@ -23,10 +23,8 @@ def get_next_stream_message():
 
     for msg_list in consumer:
         msg = json.loads(msg_list.value)
-        bpm = float(msg["bpm"])
 
-        if bpm:
-            last_value = bpm
-            yield bpm
-        else:
-            yield last_value
+        if bpm := msg["bpm"]:
+            last_value = float(bpm)
+
+        yield last_value
