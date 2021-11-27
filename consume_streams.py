@@ -1,3 +1,5 @@
+import json
+
 from kafka import KafkaConsumer
 
 # this is using the kafka-python package now,
@@ -12,6 +14,8 @@ consumer = KafkaConsumer(
 
 
 def get_next_stream_message():
-    for msg in consumer:
-        print(msg)
-        yield msg
+    for msg_list in consumer:
+        msg = json.loads(msg_list.value)
+        bpm = float(msg["bpm"])
+
+        yield bpm
