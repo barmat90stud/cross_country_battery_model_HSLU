@@ -38,12 +38,7 @@ newest_value = MIN_VALUE
     [Input("graph-update", "n_intervals")],
 )
 def update_graph(n):
-    global newest_value
-
-    if value := next(get_next_stream_message()):
-        newest_value = value
-    else:
-        value = newest_value
+    value = next(get_next_stream_message())
 
     data = plotly.graph_objs.Bar(
         x=[value],
