@@ -18,7 +18,7 @@ conda install python=3.9
 python -m pip install -r requirements.txt
 ```
 
-## Run dash (visualized Kafka streams)
+## Run dash (visualize Kafka streams)
 Open `Anaconda Prompt`
 (via Windows start menu)
 ```

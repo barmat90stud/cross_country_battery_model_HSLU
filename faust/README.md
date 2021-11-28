@@ -1,5 +1,11 @@
 # cross_country_battery_model_HSLU
 
+The Python library `faust` was investigated to consume
+the kafka messages, but was not used in the end.
+
+These instructions here are not needed,
+but give you a head-start if you want to
+use faust in the future...
 
 ## Installation
 Open `Anaconda Prompt`
