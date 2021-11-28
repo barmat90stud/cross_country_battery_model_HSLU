@@ -18,7 +18,12 @@ conda install python=3.9
 python -m pip install -r requirements.txt
 ```
 
-## Run dash (visualized Kafka streams)
+
+## Run faust (Kafka streams consumer) (optional)
+(not necessary for the visualisation for now,
+ but the `faust` library could be used instead of
+ `kafka-python` which in the future)
+
 Open `Anaconda Prompt`
 (via Windows start menu)
 ```
@@ -26,8 +31,5 @@ Open `Anaconda Prompt`
 cd c:\projects\cross_country_battery_model_HSLU
 
 conda activate .venv/
-python visualize_streams.py
+python -m faust -A consume worker -l info
 ```
-
-Now, you can open http://127.0.0.1:8050/
-in the browser on your developer PC.

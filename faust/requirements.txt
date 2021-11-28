@@ -1,6 +1,11 @@
 # consume kafka streams
 kafka-python
+faust
 
 # visualisation
 dash
 plotly
+
+
+## jupyter (not yet used)
+#notebook

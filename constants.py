@@ -6,10 +6,10 @@ MAX_VALUE = 200.0
 ENERGY_NEEDED_THRESHOLD = 140.0
 NEARLY_DYING_THRESHOLD = 185.0
 
-PLOT_TITLE = "Cross-Country Battery"
+PLOT_TITLE = "Cross-Country Battery Model"
 
 
 # kafka
 
 KAFKA_BOOTSTRAP_SERVERS = ['86.119.35.243:9092']
-KAFKA_TOPIC_NAME = "training_session"  # TODO insert finalized topic name
+KAFKA_TOPIC_NAME = "session_s2"  # TODO insert finalized topic name
