@@ -29,10 +29,14 @@ conda activate .venv/
 python visualize_streams.py
 ```
 
-## Run faust (Kafka streams consumer)
+Now, you can open http://127.0.0.1:8050/
+in the browser on your developer PC.
+
+
+## Run faust (Kafka streams consumer) (optional)
 (not necessary for the visualisation for now,
  but the `faust` library could be used instead of
- `kafka-python` which is used now)
+ `kafka-python` which in the future)
 
 Open `Anaconda Prompt`
 (via Windows start menu)
