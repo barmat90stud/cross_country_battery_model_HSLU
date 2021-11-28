@@ -2,11 +2,13 @@ import json
 
 from kafka import KafkaConsumer
 
+import constants
+
 
 consumer = KafkaConsumer(
-    'test',
+    constants.KAFKA_TOPIC_NAME,
     auto_offset_reset='earliest',
-    bootstrap_servers=['86.119.35.243:9092'],
+    bootstrap_servers=constants.KAFKA_BOOTSTRAP_SERVERS,
 )
 
 

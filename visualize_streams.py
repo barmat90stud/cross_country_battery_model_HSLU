@@ -5,16 +5,8 @@ import dash_html_components as html
 import plotly
 import plotly.graph_objs as go
 
+import constants
 from consume_streams import get_next_stream_message
-
-
-# VORN data
-
-MIN_VALUE = 40.0
-MAX_VALUE = 200.0
-
-ENERGY_NEEDED_THRESHOLD = 140.0
-NEARLY_DYING_THRESHOLD = 185.0
 
 
 app = dash.Dash(__name__)
@@ -30,7 +22,7 @@ app.layout = html.Div(
     ]
 )
 
-newest_value = MIN_VALUE
+newest_value = constants.MIN_VALUE
 
 
 @app.callback(
@@ -44,9 +36,9 @@ def update_graph(n):
         x=[value],
     )
 
-    if value <= ENERGY_NEEDED_THRESHOLD:
+    if value <= constants.ENERGY_NEEDED_THRESHOLD:
         status_color = "green"
-    elif ENERGY_NEEDED_THRESHOLD < value < NEARLY_DYING_THRESHOLD:
+    elif constants.ENERGY_NEEDED_THRESHOLD < value < constants.NEARLY_DYING_THRESHOLD:
         status_color = "yellow"
     else:
         status_color = "red"
@@ -54,9 +46,9 @@ def update_graph(n):
     return {
         "data": [data],
         "layout": go.Layout(
-            xaxis={"range": [MIN_VALUE, MAX_VALUE]},
+            xaxis={"range": [constants.MIN_VALUE, constants.MAX_VALUE]},
             yaxis={"visible": False, "showticklabels": False},
-            title="Cross-Country Battery",
+            title=constants.PLOT_TITLE,
             colorway=[status_color],
         ),
     }
