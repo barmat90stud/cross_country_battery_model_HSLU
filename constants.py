@@ -1,3 +1,6 @@
+import logging
+
+
 # heart-beats per minute
 
 MIN_VALUE = 40.0
@@ -11,5 +14,8 @@ PLOT_TITLE = "Cross-Country Battery Model"
 
 # kafka
 
-KAFKA_BOOTSTRAP_SERVERS = ['86.119.35.243:9092']
-KAFKA_TOPIC_NAME = "session_s2"  # TODO insert finalized topic name
+KAFKA_BOOTSTRAP_SERVERS = ["86.119.35.243:9092"]
+KAFKA_TOPIC_NAME = "all_trainings"
+KAFKA_PLOT_FIELD = "BPM"
+
+KAFKA_LOGGING_LEVEL = logging.INFO
