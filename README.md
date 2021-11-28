@@ -3,7 +3,7 @@
 
 ## Installation
 Open `Anaconda Prompt`
-(via Windows start menu)
+(via Windows start menu) and run:
 ```
 # change to the directory of this README.md file
 cd c:\projects\cross_country_battery_model_HSLU
@@ -18,9 +18,14 @@ conda install python=3.9
 python -m pip install -r requirements.txt
 ```
 
+
+## Configuration
+Fill in the appropriate settings in `constants.py`.
+
+
 ## Run dash (visualize Kafka streams)
 Open `Anaconda Prompt`
-(via Windows start menu)
+(via Windows start menu) and run:
 ```
 # change to the directory of this README.md file
 cd c:\projects\cross_country_battery_model_HSLU

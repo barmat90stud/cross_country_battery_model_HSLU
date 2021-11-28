@@ -14,7 +14,7 @@ PLOT_TITLE = "Cross-Country Battery Model"
 
 # kafka
 
-KAFKA_BOOTSTRAP_SERVERS = ["86.119.35.243:9092"]
+KAFKA_BOOTSTRAP_SERVERS = ["10.11.22.33:9092"]
 KAFKA_TOPIC_NAME = "all_trainings"
 KAFKA_PLOT_FIELD = "BPM"
 
