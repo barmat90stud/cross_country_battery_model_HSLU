@@ -1,0 +1,58 @@
+#Connect to ksql:
+docker exec -it ksqldb-cli ksql http://86.119.35.243:8088/
+
+#check if topic gets data
+
+docker exec -ti kcat kcat -b kafka-1 -t test  -f "%k - %s\n"
+
+
+#create stream:
+
+CREATE STREAM IF NOT EXISTS session_s
+  (session_name VARCHAR,
+   timestamp DOUBLE,
+   bpm DOUBLE,
+   br DOUBLE,
+   hrv DOUBLE,
+   ibi DOUBLE,
+   distance DOUBLE,
+   altitude_change DOUBLE,
+   gradients DOUBLE,
+   speed DOUBLE)
+  WITH (kafka_topic='all_trainings',
+        value_format='JSON');
+
+#change data types in stream ???
+
+#select specific session:
+select * from session_s where Session = 'Core_315_1065' emit changes;
+
+#create new stream with "energy_consumption" based on bpm
+
+CREATE STREAM IF NOT EXISTS session_s2
+  WITH (kafka_topic='all_trainings',
+        value_format='JSON')
+AS 
+SELECT *, 
+    CASE
+        WHEN bpm <120 THEN -1
+        WHEN bpm >120 and bpm <140 THEN 0
+        WHEN bpm >140 and bpm <170 THEN 1
+        WHEN bpm >170 THEN 2
+    END AS bpm_eng_consumption,
+    CASE
+        WHEN hrv >50 THEN -1
+        WHEN hrv >30 and hrv <50 THEN 0
+        WHEN hrv >10 and hrv <30 THEN 1
+        WHEN hrv <10 THEN 2
+    END AS hrv_eng_consumption
+FROM session_s;
+
+#create sessions streams
+CREATE STREAM IF NOT EXISTS Core_315_284
+  WITH (kafka_topic='all_trainings',
+        value_format='JSON')
+AS
+SELECT *
+FROM session_s2
+WHERE session_name = 'Core_315_284';
